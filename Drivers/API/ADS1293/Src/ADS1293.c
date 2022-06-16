@@ -9,41 +9,43 @@
 #include "ADS1293.h"
 #include "NUCLEO_F429ZI_port.h"
 
-#define REG_ID_SIZE 1
-
 /**
  * @brief  Initialize ADS1293 device
  * @param  dummy set this value to 0
- * @retval bool Init process status
+ * @retval ADS1293_StatusTypeDef Init process status
  */
-bool_t ads1293Init(uint8_t dummy) {
+ADS1293_StatusTypeDef ads1293Init(uint8_t dummy) {
 	/* Init SPI peripheral */
-	if (!spiInit(0)) {
-		return false;
+	if (spiInit(0) != NUCLEO_SPI_OK) {
+		return ADS1293_ERROR;
 	}
 
 	/* Set device CS to HIGH */
 	setNSS(GPIO_PIN_SET);
 
-	return true;
+	return ADS1293_OK;
 }
 
 /**
  * @brief  Read ADS1293 ID register
  * @param  pidData pointer to the uint8_t buffer
- * @retval uint8_t ID value
+ * @retval ADS1293_StatusTypeDef process status
  */
-void ads1293ReadID(uint8_t *pidData) {
+ADS1293_StatusTypeDef ads1293ReadID(uint8_t *pidData) {
 
 	uint8_t ptxData = REVID | RREG;
 
 	/* Validate *pidData */
 	if (pidData == NULL) {
-		return;
+		return ADS1293_ERROR;
 	}
 
 	/* Read register and get sensor ID into pidData */
-	ads1293ReadRegister(&ptxData, pidData, REG_ID_SIZE);
+	if (ads1293ReadRegister(&ptxData, pidData, REG_ID_SIZE) != ADS1293_OK) {
+		return ADS1293_ERROR;
+	}
+
+	return ADS1293_OK;
 
 }
 
@@ -52,12 +54,13 @@ void ads1293ReadID(uint8_t *pidData) {
  * @param  ptxData pointer to the uint8_t buffer to be sent with the register address
  * @param  prxData pointer to the uint8_t buffer to store the register value
  * @param  size size amount of data to be sent
- * @retval none
+ * @retval ADS1293_StatusTypeDef process status
  */
-void ads1293ReadRegister(uint8_t *ptxData, uint8_t *prxData, uint16_t size) {
+ADS1293_StatusTypeDef ads1293ReadRegister(uint8_t *ptxData, uint8_t *prxData,
+		uint16_t size) {
 	/* Validate *ptxData, *prxData and size parameters */
 	if (ptxData == NULL || prxData == NULL || size <= 0) {
-		return;
+		return ADS1293_ERROR;
 	}
 
 	/* ADS1293 sensor uses 7bit register addresses. MSB in ptxData indicates if the register is being
@@ -68,13 +71,19 @@ void ads1293ReadRegister(uint8_t *ptxData, uint8_t *prxData, uint16_t size) {
 	setNSS(GPIO_PIN_RESET);
 
 	/* Send register address with the read command over SPI protocol */
-	spiSendData(&readAddress, REG_ID_SIZE);
+	if (spiSendData(&readAddress, REG_ID_SIZE) != NUCLEO_SPI_OK) {
+		return ADS1293_ERROR;
+	}
 
 	/* Read register and load value into *prxData */
-	spiReceiveData(prxData, REG_ID_SIZE);
+	if (spiReceiveData(prxData, REG_ID_SIZE) != NUCLEO_SPI_OK) {
+		return ADS1293_ERROR;
+	}
 
 	/* Set ADS1293 CS to HIGH to finish communication */
 	setNSS(GPIO_PIN_SET);
+
+	return ADS1293_OK;
 }
 
 /**
@@ -82,9 +91,10 @@ void ads1293ReadRegister(uint8_t *ptxData, uint8_t *prxData, uint16_t size) {
  * @param  ptxData pointer to the uint8_t buffer to be sent with the register address
  * @param  prxData pointer to the uint8_t buffer to store the register value
  * @param  size size amount of data to be sent
- * @retval none
+ * @retval ADS1293_StatusTypeDef process status
  */
-void ads1293WriteRegister(uint8_t wrAddress, uint8_t data, uint16_t size) {
+ADS1293_StatusTypeDef ads1293WriteRegister(uint8_t wrAddress, uint8_t data,
+		uint16_t size) {
 	uint8_t dataToSend = data;
 
 	/* ADS1293 sensor uses 7bit register addresses. MSB in ptxData indicates if the register is being
@@ -95,19 +105,25 @@ void ads1293WriteRegister(uint8_t wrAddress, uint8_t data, uint16_t size) {
 	setNSS(GPIO_PIN_RESET);
 
 	/* Send register address with the read command over SPI protocol */
-	spiSendData(&writeAddress, size);
+	if (spiSendData(&writeAddress, size) != NUCLEO_SPI_OK) {
+		return ADS1293_ERROR;
+	}
 
 	/* Send register address with the read command over SPI protocol */
-	spiSendData(&dataToSend, size);
+	if (spiSendData(&dataToSend, size) != NUCLEO_SPI_OK) {
+		return ADS1293_ERROR;
+	}
 
 	/* Set ADS1293 CS to HIGH to finish communication */
 	setNSS(GPIO_PIN_SET);
+
+	return ADS1293_OK;
 }
 
 /**
  * @brief  Set ADS1293 to start a 3 lead ecg
  * @param  none
- * @retval ADS1293 status
+ * @retval none
  */
 void ads1293Set3LeadECG(void) {
 	/* Connect channel 1’s INP to IN2 and INN to IN1 */
@@ -140,7 +156,7 @@ void ads1293Set3LeadECG(void) {
 /**
  * @brief  Read loop read-back register
  * @param  sourceBytes source bytes number
- * @retval ADS1293 status
+ * @retval none
  */
 void ads1293ReadDataLoop(uint8_t *rawData, uint32_t sourceBytes) {
 	/* Read DATA_LOOP register */

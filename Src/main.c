@@ -51,21 +51,15 @@ int main(void) {
 	/* Initialize BSP Led for LED2 and LED3*/
 	BSP_LED_Init(LED2);
 
-	/* Initialize Debounce MEF */
-	debounceFSM_init();
-
 	/* Initialize UART port */
 	if (!uartInit()) {
 		Error_Handler();
 	}
 
 	/* Initialize ADS1293 device */
-	if (!ads1293Init(0)) {
+	if (ads1293Init(0) != ADS1293_OK) {
 		Error_Handler();
 	}
-
-	/* Init CH1 CH2 ECG data conversion */
-	ads1293Set3LeadECG();
 
 	/* ID data buffer */
 	static uint8_t idData = 0;
@@ -75,10 +69,15 @@ int main(void) {
 	static char message[50];
 
 	uartSendString((uint8_t*) "Starting ADS1293 Main Programm:\r\n");
-	sprintf(message, "ADS1293 ID: 0x%x\r\n", idData);
+	sprintf(message, "ADS1293 ID: 0x%x\r\n\n", idData);
 	uartSendString((uint8_t*) message);
 
+	/* Init CH1 CH2 ECG data conversion */
+	ads1293Set3LeadECG();
+
+	/* ECG Data buffer */
 	uint8_t ecgData[7];
+
 	/* Infinite loop */
 	while (1) {
 		if (!HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15)) {

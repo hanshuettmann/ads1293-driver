@@ -19,9 +19,9 @@ static SPI_HandleTypeDef hspi;
 /**
  * @brief  Initialize SPI peripheral
  * @param  dummy set this value to 0
- * @retval bool Init process status
+ * @retval NUCLEO_SPIStatusTypeDef Init process status
  */
-bool_t spiInit(uint8_t dummy) {
+NUCLEO_SPIStatusTypeDef spiInit(uint8_t dummy) {
 	/*##-1- Configure the SPI peripheral ######################################*/
 	hspi.Instance = SPI1;
 
@@ -37,9 +37,9 @@ bool_t spiInit(uint8_t dummy) {
 	/* Init peripheral */
 	if (HAL_SPI_Init(&hspi) != HAL_OK) {
 		/* Initialization Error */
-		return false;
+		return NUCLEO_SPI_ERROR;
 	}
-	return true;
+	return NUCLEO_SPI_OK;
 }
 
 /**
@@ -48,13 +48,17 @@ bool_t spiInit(uint8_t dummy) {
  * @param  size amount of data to be sent
  * @retval none
  */
-void spiSendData(uint8_t *ptxData, uint16_t size) {
+NUCLEO_SPIStatusTypeDef spiSendData(uint8_t *ptxData, uint16_t size) {
 	/* Validate ptxData and size parameters */
 	if (ptxData == NULL || size <= 0) {
-		return;
+		return NUCLEO_SPI_ERROR;
 	}
 
-	HAL_SPI_Transmit(&hspi, ptxData, size, HAL_MAX_DELAY);
+	if (HAL_SPI_Transmit(&hspi, ptxData, size, HAL_MAX_DELAY) != HAL_OK) {
+		return NUCLEO_SPI_ERROR;
+	}
+
+	return NUCLEO_SPI_OK;
 }
 
 /**
@@ -63,13 +67,17 @@ void spiSendData(uint8_t *ptxData, uint16_t size) {
  * @param  size amount of data to be sent
  * @retval none
  */
-void spiReceiveData(uint8_t *prxData, uint16_t size) {
+NUCLEO_SPIStatusTypeDef spiReceiveData(uint8_t *prxData, uint16_t size) {
 	/* Validate ptxData and size parameters */
 	if (prxData == NULL || size <= 0) {
-		return;
+		return NUCLEO_SPI_ERROR;
 	}
 
-	HAL_SPI_Receive(&hspi, prxData, size, HAL_MAX_DELAY);
+	if (HAL_SPI_Receive(&hspi, prxData, size, HAL_MAX_DELAY) != HAL_OK) {
+		return NUCLEO_SPI_ERROR;
+	}
+
+	return NUCLEO_SPI_OK;
 }
 
 /**
@@ -78,5 +86,6 @@ void spiReceiveData(uint8_t *prxData, uint16_t size) {
  * @retval none
  */
 void setNSS(GPIO_PinState state) {
+	/* GPIO PA4 used as NSS line */
 	HAL_GPIO_WritePin(SPIx_NSS_SOFT_GPIO_PORT, SPIx_NSS_SOFT_PIN, state);
 }

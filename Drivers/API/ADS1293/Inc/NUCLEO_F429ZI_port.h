@@ -13,7 +13,11 @@
 #include "stm32f4xx_nucleo_144.h"
 #include <stdbool.h>
 
-typedef bool bool_t;
+
+/* Public typedef ------------------------------------------------------------*/
+typedef enum {
+	NUCLEO_SPI_ERROR, NUCLEO_SPI_OK
+} NUCLEO_SPIStatusTypeDef;
 
 /* User can use this section to tailor SPIx instance used and associated
  resources */
@@ -52,15 +56,10 @@ typedef bool bool_t;
 #define SPIx_MOSI_AF                     GPIO_AF5_SPI1
 #define SPIx_NSS_AF                      GPIO_AF5_SPI1
 
-/* Public typedef ------------------------------------------------------------*/
-typedef enum {
-	NUCLEO_SPI_ERROR, NUCLEO_SPI_OK
-} NUCLEO_SPIStatusTypeDef;
-
 /* Public function prototypes ------------------------------------------------*/
-bool_t spiInit(uint8_t dummy);
-void spiSendData(uint8_t *ptxData, uint16_t size);
-void spiReceiveData(uint8_t *prxData, uint16_t size);
+NUCLEO_SPIStatusTypeDef spiInit(uint8_t dummy);
+NUCLEO_SPIStatusTypeDef spiSendData(uint8_t *ptxData, uint16_t size);
+NUCLEO_SPIStatusTypeDef spiReceiveData(uint8_t *prxData, uint16_t size);
 void setNSS(GPIO_PinState state);
 
 #endif /* API_ADS1293_INC_NUCLEO_F429ZI_PORT_H_ */

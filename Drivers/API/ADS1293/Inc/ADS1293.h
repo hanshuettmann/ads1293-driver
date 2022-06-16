@@ -7,13 +7,10 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_nucleo_144.h"
 
-#include "stdbool.h"
 #include "stdint.h"
 
 #ifndef ADS1293_INC_ADS1293_H_
 #define ADS1293_INC_ADS1293_H_
-
-typedef bool bool_t;
 
 /* Public typedef ------------------------------------------------------------*/
 typedef enum {
@@ -59,11 +56,18 @@ typedef enum {
 
 #define   DATA_LOOP		0x50
 
+/* These GPIO pins must be initialized in the hal_msp file -------------------*/
+#define ADS1293_DRDB_Pin		GPIO_PIN_15
+#define ADS1293_DRDB_GPIO_Port	GPIOD
+
+/* ADS1293 register data size ------------------------------------------------*/
+#define REG_ID_SIZE 1
+
 /* Public function prototypes ------------------------------------------------*/
-bool_t ads1293Init(uint8_t dummy);
-void ads1293ReadRegister(uint8_t *ptxData, uint8_t *prxData, uint16_t size);
-void ads1293ReadID(uint8_t *pidData);
-void ads1293WriteRegister(uint8_t wrAddress, uint8_t data, uint16_t size);
+ADS1293_StatusTypeDef ads1293Init(uint8_t dummy);
+ADS1293_StatusTypeDef ads1293ReadRegister(uint8_t *ptxData, uint8_t *prxData, uint16_t size);
+ADS1293_StatusTypeDef ads1293ReadID(uint8_t *pidData);
+ADS1293_StatusTypeDef ads1293WriteRegister(uint8_t wrAddress, uint8_t data, uint16_t size);
 void ads1293Set3LeadECG(void);
 void ads1293ReadDataLoop(uint8_t *rawData, uint32_t loopSize);
 
