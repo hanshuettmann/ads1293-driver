@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "api_uart.h": "c",
+        "api_spi.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "api_ads1293.h": "c"
+    }
+}

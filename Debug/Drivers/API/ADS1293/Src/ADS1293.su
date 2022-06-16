@@ -1,0 +1,6 @@
+../Drivers/API/ADS1293/Src/ADS1293.c:19:8:ads1293Init	16	static
+../Drivers/API/ADS1293/Src/ADS1293.c:36:6:ads1293ReadID	24	static
+../Drivers/API/ADS1293/Src/ADS1293.c:57:6:ads1293ReadRegister	32	static
+../Drivers/API/ADS1293/Src/ADS1293.c:87:6:ads1293WriteRegister	24	static
+../Drivers/API/ADS1293/Src/ADS1293.c:112:6:ads1293Set3LeadECG	8	static
+../Drivers/API/ADS1293/Src/ADS1293.c:145:6:ads1293ReadDataLoop	24	static
