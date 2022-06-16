@@ -81,14 +81,10 @@ int main(void) {
 	while (1) {
 		if (!HAL_GPIO_ReadPin(ADS1293_DRDB_GPIO_Port, ADS1293_DRDB_Pin)) {
 			ads1293ReadDataLoop(ecgData, 6);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[0]);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[1]);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[2]);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[3]);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[4]);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[5]);
-			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[6]);
-			uartSendString((uint8_t*) message);
+			for (uint32_t i = 0; i < sizeof(ecgData) / sizeof(uint8_t); ++i) {
+				sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[i]);
+				uartSendString((uint8_t*) message);
+			}
 		}
 	}
 }
