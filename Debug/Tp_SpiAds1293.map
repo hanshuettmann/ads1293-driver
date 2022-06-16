@@ -11991,7 +11991,7 @@ LOAD c:/st/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_ranges  0x0000000000000918       0x20 ./Src/main.o
  .debug_ranges  0x0000000000000938       0x20 ./Startup/startup_stm32f429xx.o
 
-.debug_macro    0x0000000000000000    0x268c5
+.debug_macro    0x0000000000000000    0x268c1
  .debug_macro   0x0000000000000000      0x3c3 ./Drivers/API/ADS1293/Src/ADS1293.o
  .debug_macro   0x00000000000003c3      0xa90 ./Drivers/API/ADS1293/Src/ADS1293.o
  .debug_macro   0x0000000000000e53       0x22 ./Drivers/API/ADS1293/Src/ADS1293.o
@@ -12093,9 +12093,9 @@ LOAD c:/st/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_macro   0x0000000000025df4      0x264 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
  .debug_macro   0x0000000000026058      0x24f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
  .debug_macro   0x00000000000262a7      0x241 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_macro   0x00000000000264e8      0x3dd ./Src/main.o
+ .debug_macro   0x00000000000264e8      0x3d9 ./Src/main.o
 
-.debug_line     0x0000000000000000     0xf7fa
+.debug_line     0x0000000000000000     0xf7e8
  .debug_line    0x0000000000000000      0xc46 ./Drivers/API/ADS1293/Src/ADS1293.o
  .debug_line    0x0000000000000c46      0xc08 ./Drivers/API/ADS1293/Src/NUCLEO_F429ZI_port.o
  .debug_line    0x000000000000184e      0xbb5 ./Drivers/API/Src/API_Uart.o
@@ -12112,8 +12112,8 @@ LOAD c:/st/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x000000000000906d      0xebd ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
  .debug_line    0x0000000000009f2a     0x2044 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
  .debug_line    0x000000000000bf6e     0x2bc8 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_line    0x000000000000eb36      0xc46 ./Src/main.o
- .debug_line    0x000000000000f77c       0x7e ./Startup/startup_stm32f429xx.o
+ .debug_line    0x000000000000eb36      0xc34 ./Src/main.o
+ .debug_line    0x000000000000f76a       0x7e ./Startup/startup_stm32f429xx.o
 
 .debug_str      0x0000000000000000    0xe4950
  .debug_str     0x0000000000000000    0xe1168 ./Drivers/API/ADS1293/Src/ADS1293.o

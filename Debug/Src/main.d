@@ -39,7 +39,6 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.h \
  C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/ADS1293/Inc/NUCLEO_F429ZI_port.h \
- C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/Inc/API_Debounce.h \
  C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/ADS1293/Inc/ADS1293.h
 ../Inc/main.h:
 C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/Inc/API_Uart.h:
@@ -82,5 +81,4 @@ C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/STM32F4xx_HAL_Driv
 C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.h:
 C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/ADS1293/Inc/NUCLEO_F429ZI_port.h:
-C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/Inc/API_Debounce.h:
 C:/Hans/UBA/CommProtocols/PdC_Workspace/Tp_SpiAds1293/Drivers/API/ADS1293/Inc/ADS1293.h:

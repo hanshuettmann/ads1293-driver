@@ -9,7 +9,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "API_Debounce.h"
 #include "API_Uart.h"
 #include "ADS1293.h"
 
@@ -80,7 +79,7 @@ int main(void) {
 
 	/* Infinite loop */
 	while (1) {
-		if (!HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15)) {
+		if (!HAL_GPIO_ReadPin(ADS1293_DRDB_GPIO_Port, ADS1293_DRDB_Pin)) {
 			ads1293ReadDataLoop(ecgData, 6);
 			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[0]);
 			sprintf(message, "ADS1293 ECG Data: %d\r\n", ecgData[1]);

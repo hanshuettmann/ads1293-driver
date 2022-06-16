@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_ranges 00000958  00000000  00000000  0002e818  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  000268c5  00000000  00000000  0002f170  2**0
+ 17 .debug_macro  000268c1  00000000  00000000  0002f170  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000f7fa  00000000  00000000  00055a35  2**0
+ 18 .debug_line   0000f7e8  00000000  00000000  00055a31  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000e4950  00000000  00000000  0006522f  2**0
+ 19 .debug_str    000e4950  00000000  00000000  00065219  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000050  00000000  00000000  00149b7f  2**0
+ 20 .comment      00000050  00000000  00000000  00149b69  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00002bec  00000000  00000000  00149bd0  2**2
+ 21 .debug_frame  00002bec  00000000  00000000  00149bbc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -8196,7 +8196,7 @@ int main(void) {
 
 	/* Infinite loop */
 	while (1) {
-		if (!HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15)) {
+		if (!HAL_GPIO_ReadPin(ADS1293_DRDB_GPIO_Port, ADS1293_DRDB_Pin)) {
  80033d4:	f44f 4100 	mov.w	r1, #32768	; 0x8000
  80033d8:	4820      	ldr	r0, [pc, #128]	; (800345c <main+0xe4>)
  80033da:	f7fd ff15 	bl	8001208 <HAL_GPIO_ReadPin>
@@ -8253,7 +8253,7 @@ int main(void) {
 			uartSendString((uint8_t*) message);
  8003442:	4805      	ldr	r0, [pc, #20]	; (8003458 <main+0xe0>)
  8003444:	f7fd faa0 	bl	8000988 <uartSendString>
-		if (!HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15)) {
+		if (!HAL_GPIO_ReadPin(ADS1293_DRDB_GPIO_Port, ADS1293_DRDB_Pin)) {
  8003448:	e7c4      	b.n	80033d4 <main+0x5c>
  800344a:	bf00      	nop
  800344c:	2000015c 	.word	0x2000015c
